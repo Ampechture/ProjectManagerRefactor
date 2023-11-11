@@ -14,13 +14,13 @@ public class RestController {
 
     @GetMapping(value = "/")
     public String redirect() {
-        return "redirect:/welcome";
+        return "redirect:/main";
     }
 
-    @GetMapping(value = "/welcome")
+    @GetMapping(value = "/main")
     public String welcome(Model model) {
         model.addAttribute("data", "Привет");
-        return "welcome";
+        return "main";
     }
 
     @GetMapping(value = "list/groups")
