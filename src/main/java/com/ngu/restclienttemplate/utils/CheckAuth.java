@@ -15,4 +15,12 @@ public class CheckAuth {
         }
         return false;
     }
+    public static boolean isAdmin() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        if (authentication.isAuthenticated()) {
+            return authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return false;
+    }
 }

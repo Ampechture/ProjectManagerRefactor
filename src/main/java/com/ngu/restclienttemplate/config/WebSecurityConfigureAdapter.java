@@ -30,7 +30,7 @@ public class WebSecurityConfigureAdapter {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index").permitAll()
+                                .requestMatchers("/index/**").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
                                 .requestMatchers("/api/**").hasRole("USER")
                 ).formLogin(
