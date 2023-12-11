@@ -32,12 +32,12 @@ public class WebSecurityConfigureAdapter {
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index/**").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
-                                .requestMatchers("/api/**").hasRole("USER")
+                                .requestMatchers("/api/**").hasRole("ADMIN")
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/index")
+                                .defaultSuccessUrl("/users")
                                 .permitAll()
                 ).logout(
                         logout -> logout
