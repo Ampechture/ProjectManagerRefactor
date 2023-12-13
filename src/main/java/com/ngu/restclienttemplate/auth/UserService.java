@@ -5,7 +5,9 @@ import com.ngu.restclienttemplate.entity.Role;
 import com.ngu.restclienttemplate.entity.User;
 import com.ngu.restclienttemplate.repositories.RoleRepository;
 import com.ngu.restclienttemplate.repositories.UserRepository;
+import com.ngu.restclienttemplate.utils.CheckAuth;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,7 +49,7 @@ public class UserService implements UserDetailsService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
+    public Long getUserId() { User user = userRepository.findByEmail(CheckAuth.getCurrentEmail()); return user.getId(); }
     public void saveUser(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getFirstName() + " " + userDto.getLastName());

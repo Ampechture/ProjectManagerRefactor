@@ -30,14 +30,14 @@ public class WebSecurityConfigureAdapter {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index/**").permitAll()
-                                .requestMatchers("/users").hasRole("ADMIN")
-                                .requestMatchers("/api/**").hasRole("ADMIN")
+                                .requestMatchers("/**").authenticated()
+                                .requestMatchers("/users").authenticated()
+                                .requestMatchers("/api/**").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/")
                                 .permitAll()
                 ).logout(
                         logout -> logout

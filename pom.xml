@@ -20,7 +20,7 @@
     </properties>
 
     <groupId>com.example</groupId>
-    <artifactId>RestClientTemplate</artifactId>
+    <artifactId>ProjectManager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>RestClientTemplate</name>
     <description>RestClientTemplate</description>

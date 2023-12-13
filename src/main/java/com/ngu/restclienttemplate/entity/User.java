@@ -1,6 +1,7 @@
 package com.ngu.restclienttemplate.entity;
 
 
+import com.ngu.restclienttemplate.MainCode.entity.Task;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
