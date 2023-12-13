@@ -58,11 +58,11 @@ public class UserService implements UserDetailsService {
         // если не надо шифровать пароль раскомментируйте
         user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByName("ROLE_USER");
+        /*Role role = roleRepository.findByName("ROLE_USER");
         if (role == null) {
             role = checkRoleExist();
         }
-        user.setRoles(Arrays.asList(role));
+        user.setRoles(Arrays.asList(role));*/
         userRepository.save(user);
     }
 

@@ -2,27 +2,15 @@ package com.ngu.restclienttemplate.MainCode.entity;
 
 import jakarta.persistence.*;
 import com.ngu.restclienttemplate.entity.User;
+import lombok.Data;
 
 import java.util.List;
 @Entity
+@Data
 @Table(name = "tasks")
 public class Task {
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
 
     public List<Subtask> getSubtasks() {
         return subtasks;
@@ -31,6 +19,7 @@ public class Task {
     public void setSubtasks(List<Subtask> subtasks) {
         this.subtasks = subtasks;
     }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +31,19 @@ public class Task {
         return userId;
     }
 
-    private Long userId;
-    public void addProjectId(Long userId){
-        this.userId = userId;
+    public Long getId() {
+        return id;
     }
+
+    private Long userId;
+
+    /*@ManyToMany
+    @JoinTable(
+            name="tasksUser ",
+            joinColumns = @JoinTable(name="task_id"),
+            inverseJoinColumns = @JoinTable(name = "user_id")
+    )
+    public List<User> usersIdentity;*/
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Subtask> subtasks;

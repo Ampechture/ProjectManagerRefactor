@@ -26,7 +26,7 @@ public class TaskController {
     private UserService userService;
     @GetMapping("/")
     public String index(Model model) {
-        List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks = taskRepository.findAllByuserId(userService.getUserId());
         model.addAttribute("tasks", tasks);
         model.addAttribute("newTask", new Task());
         model.addAttribute("newSubtask", new Subtask());
@@ -35,9 +35,10 @@ public class TaskController {
 
     @PostMapping("/addTask")
     public String addTask(Task task) {
-        if (taskRepository.existsByprojectName(task.getProjectName())){return "WrongLoginData";
-        }else {
-            task.setId(userService.getUserId());
+        /*if (taskRepository.existsByprojectName(task.getProjectName())){return "WrongLoginData";
+        }else*/ {
+            //TO CHANGE :
+            task.setUserId(userService.getUserId());
             taskRepository.save(task);
 
             return "redirect:/";
