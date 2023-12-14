@@ -2,9 +2,9 @@ package com.ngu.restclienttemplate.MainCode.entity.controllers;
 
 
 import com.ngu.restclienttemplate.MainCode.entity.*;
-
 import com.ngu.restclienttemplate.MainCode.entity.repository.TaskRepository;
 import com.ngu.restclienttemplate.auth.UserService;
+import com.ngu.restclienttemplate.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,9 @@ public class TaskController {
     private UserService userService;
     @GetMapping("/")
     public String index(Model model) {
-        List<Task> tasks = taskRepository.findAllByuserId(userService.getUserId());
+        Long userId = userService.getUserId();
+        User user = userService.userFindById(userId);
+        List<Task> tasks =  taskRepository.findAllByusersIdentity(user);
         model.addAttribute("tasks", tasks);
         model.addAttribute("newTask", new Task());
         model.addAttribute("newSubtask", new Subtask());
@@ -35,11 +37,14 @@ public class TaskController {
 
     @PostMapping("/addTask")
     public String addTask(Task task) {
-        /*if (taskRepository.existsByprojectName(task.getProjectName())){return "WrongLoginData";
-        }else*/ {
-            //TO CHANGE :
-            task.setUserId(userService.getUserId());
+        if (taskRepository.existsByprojectName(task.getProjectName())){return "WrongLoginData";
+        }else {
+            Long userId = userService.getUserId();
+            User user = userService.userFindById(userId);
+            task.setUsersIdentity(List.of(user));
+
             taskRepository.save(task);
+
 
             return "redirect:/";
         }
@@ -77,5 +82,35 @@ public class TaskController {
             return "redirect:/";
         }
     }
+    @GetMapping("/test/add")
+    public String addTest(Model model, projectId id){
+        /*Task task = new Task();
+        task.setProjectName("123");
+
+
+        User user = new User();
+        user.setName("boba");
+        user.setEmail("boba1@mail.ru");
+        user.setPassword("1234");
+        user = userService.saveUser(user);
+        task.setUsersIdentity(List.of(user));
+        taskRepository.save(task);*/
+        model.addAttribute("projectId", id);
+        return "join";
+    }
+    @PostMapping("/test/add")
+    public String joinTask(projectId projectId){
+        Task task = taskRepository.findById(projectId.getId()).orElse(null);
+        Long userId = userService.getUserId();
+        User user = userService.userFindById(userId);
+        List<User> toAdd = task.getUsersIdentity();
+        toAdd.add(user);
+        task.setUsersIdentity(toAdd);
+        taskRepository.save(task);
+        return "redirect:/";
+
+
+    }
+
 }
 

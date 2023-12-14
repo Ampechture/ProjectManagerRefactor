@@ -42,8 +42,8 @@ public class User {
     private String password;
 
 
-    /*@ManyToMany(mappedBy = "usersIdentity")
-    public List<Task> tasks;*/
+    @ManyToMany(mappedBy = "usersIdentity")
+    public List<Task> tasks;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

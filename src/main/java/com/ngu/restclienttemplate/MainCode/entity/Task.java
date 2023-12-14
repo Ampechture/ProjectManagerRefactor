@@ -12,14 +12,6 @@ public class Task {
 
 
 
-    public List<Subtask> getSubtasks() {
-        return subtasks;
-    }
-
-    public void setSubtasks(List<Subtask> subtasks) {
-        this.subtasks = subtasks;
-    }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,27 +19,17 @@ public class Task {
 
     private String projectName;
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    private Long userId;
-
-    /*@ManyToMany
+    @ManyToMany
     @JoinTable(
             name="tasksUser ",
-            joinColumns = @JoinTable(name="task_id"),
-            inverseJoinColumns = @JoinTable(name = "user_id")
+            joinColumns = @JoinColumn(name="task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    public List<User> usersIdentity;*/
+    public List<User> usersIdentity;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Subtask> subtasks;
 
-    // геттеры и сеттеры
+
 }
 

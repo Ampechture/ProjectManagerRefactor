@@ -87,6 +87,13 @@ public class UserService implements UserDetailsService {
         return roleRepository.save(role);
     }
 
+    public User userFindById(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
+    public User saveUser(User user){
+       return userRepository.save(user);
+    }
+
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         Collection<? extends GrantedAuthority> mapRoles = roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

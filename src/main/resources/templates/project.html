@@ -21,15 +21,23 @@
 <ul>
 
 
-    <li th:each="subtask : ${task.subtasks}"
-        th:text="${subtask.taskName}"
+    <li th:each="subtask : ${task.subtasks}">
+        <!--th:text="${subtask.taskName}"-->
 
-    ></li>
+     <h1>
+         Название задачи: <br>
+         <label th:text="${subtask.taskName}"></label>
+    </h1>
+       <h2> Описание задачи:
+           <br>
+           <label th:text="${subtask.description}">
+           </label>
+       </h2>
+    </li>
 
 </ul>
-<a th:href="@{/}">
-    <button>Back to Main Page</button>
+<a th:href="@{/test/add}">
+    <button>Join existing task</button>
 </a>
-
 </body>
 </html>
